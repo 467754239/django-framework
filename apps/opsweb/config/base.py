@@ -159,7 +159,7 @@ LOGGING = {
    "loggers": {
         "api": {
                  "level": "DEBUG",
-                 "handlers": ["console_handle", "monkey_file_handle"],
+                 "handlers": ["console_handle", "opsweb_file_handle"],
              },
         "django": {
              "level": "DEBUG",
@@ -171,7 +171,7 @@ LOGGING = {
              "class": "logging.StreamHandler",
              "formatter": 'simple'
          },
-        "monkey_file_handle": {
+        "opsweb_file_handle": {
              "class": "logging.FileHandler",
              "filename": os.path.join(os.path.abspath(os.path.join(BASE_DIR, "..", "..")), "logs", "api.log"),
              "formatter": "api"
