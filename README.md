@@ -3,6 +3,7 @@
 - [x] admin
 - [x] celery(rabbitmq)
 - [x] docs 
+- [x] split settings.py 
 - [x] django-rest-freamework 
 - [x] nginx + uwsgi + virtualenv + django
 
