@@ -17,7 +17,7 @@
 # Check that networking is up.
 [ "$NETWORKING" = "no" ] && exit 0
 
-BASE=/opt/opsweb
+BASE=/opt/django-framework
 uwsgi="${BASE}/.venv/bin/uwsgi"
 prog=$(basename "$uwsgi")
 UWSGI_CONF_DIR="${BASE}/uwsgi"
