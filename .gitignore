@@ -1,0 +1,15 @@
+# virtualenv
+apps/.venv/
+
+# Pycharm
+.idea/
+
+# Python
+*.py[co]
+# Vim
+*.swp
+# OS X
+*.DS_Store
+# sqlite3 db
+db.sqlite3
+logs/
