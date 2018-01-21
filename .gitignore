@@ -1,6 +1,3 @@
-# virtualenv
-apps/.venv/
-
 # Pycharm
 .idea/
 
@@ -8,8 +5,10 @@ apps/.venv/
 *.py[co]
 # Vim
 *.swp
-# OS X
-*.DS_Store
-# sqlite3 db
+
 db.sqlite3
 logs/
+
+.venv
+*.pid
+*.log
