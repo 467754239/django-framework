@@ -25,3 +25,34 @@ $ python manage.py runserver 0.0.0.0:80
     - [x] ListView
 
 
+
+## django login
+
+```python
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+@method_decorator(login_required, name='dispatch')	# 装饰类，作用于它的所有方法。
+class Book(View):
+
+	@method_decorator(login_required)				# 装饰指定的HTTP请求方法，作用于该方法。
+	def get(self, request):
+		pass
+
+	def post(self, request):
+		pass
+	
+```
+
+```python
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class Book(LoginRequiredMixin, View):
+
+	def get(self, request):
+		pass
+
+	def post(self, request):
+		pass
+```

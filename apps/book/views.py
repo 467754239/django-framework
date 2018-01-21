@@ -3,10 +3,13 @@ from __future__ import unicode_literals
 
 import logging
 
+from .models import Book
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import TemplateView
+from django.views.generic import ListView
 
 
 logger = logging.getLogger('api')
@@ -50,3 +53,19 @@ class BookTemplateView(TemplateView):
         kwargs['books'] = ['python', 'golang', 'shell']
         return super(BookTemplateView, self).get_context_data(**kwargs)  # 先执行父类并保存父类的执行结果
     '''
+
+
+class BookListView(ListView):
+    model = Book
+    template_name = 'book/book_paginate.html'
+    context_object_name = 'object_list'
+    paginate_by = 10
+
+
+    def get_context_data(self, **kwargs):
+        context = super(BookListView, self).get_context_data(**kwargs)  # 先执行父类并保存父类的执行结果
+        context['job'] = 'pythoner'
+        return context
+
+    def get_queryset(self):
+        return self.model.objects.order_by('-name')

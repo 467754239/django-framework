@@ -12,4 +12,5 @@ urlpatterns = [
     # Class Base View
     url(r'^class-base$', views.BookView.as_view()),
     url(r'^template-base$', views.BookTemplateView.as_view()),
+    url(r'^list-base$', views.BookListView.as_view()),
 ]

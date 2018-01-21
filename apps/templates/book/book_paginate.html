@@ -1,0 +1,31 @@
+
+<body>
+
+	<h1>{{ job }}</h1>
+
+	<h1>列表</h1>
+	<ul>
+		{% for obj in object_list %}
+			<li>{{ obj.pk}} {{ obj.name }} {{ obj.publish.name }} {{ obj.publish.city }}</li>
+		{% endfor %}
+	</ul>
+
+	<h1>表格</h1>
+	<table border="1">
+		<tr>
+			<td>Id</td>
+			<td>name</td>
+			<td>publish_name</td>
+			<td>publish_city</td>
+		</tr>
+		{% for obj in object_list %}
+			<tr>
+			    <td>{{ obj.pk}} </td>
+			    <td>{{ obj.name }}</td>
+			    <td>{{ obj.publish.name }} </td>
+			    <td>{{ obj.publish.city }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+</body>	
