@@ -17,4 +17,11 @@ $ pip install -r ../requirements.txt
 $ python manage.py runserver 0.0.0.0:80
 ```
 
+## django view method
+- [x] function-base-view
+- [x] class-base-view
+    - [x] View 
+    - [x] TemplateView
+    - [x] ListView
+
 
