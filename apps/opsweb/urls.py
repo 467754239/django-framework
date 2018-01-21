@@ -25,7 +25,6 @@ urlpatterns = [
 
 urlpatterns += [
     #url(r'^api-token-auth/', views.obtain_auth_token),
-    #url(r'^docs/', include('rest_framework_docs.urls')),
     url(r'^docs/', include('rest_framework_docs.urls')),
-    #url(r'^docs/', include('drf_openapi.urls'))
+    url(r'^books/', include('book.urls')),
 ]
