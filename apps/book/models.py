@@ -39,3 +39,9 @@ class Publish(BaseModel):
 class Book(BaseModel):
     price       = models.IntegerField()
     publish     = models.ForeignKey("Publish")
+
+
+class School(models.Model):
+    name    = models.CharField(max_length=32)
+    address = models.CharField(max_length=32)
+    phone   = models.CharField(max_length=32)

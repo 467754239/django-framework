@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "djcelery",
     "rest_framework_docs",
     "drf_openapi",
+    "rest_framework",
 
     'api',
     'scheduler',
@@ -61,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -221,3 +222,9 @@ CELERYD_LOG_LEVEL = 'DEBUG'
 REST_FRAMEWORK_DOCS = {
     'HIDE_DOCS': False  # Default: False
 }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+        'PAGE_SIZE': 10
+        }

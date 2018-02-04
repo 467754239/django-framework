@@ -11,21 +11,34 @@
 	</ul>
 
 	<h1>表格</h1>
+
+	<button id="add_user">添加用户</button>
+
 	<table border="1">
+		<thead>
 		<tr>
 			<td>Id</td>
 			<td>name</td>
 			<td>publish_name</td>
 			<td>publish_city</td>
+			<td>操作</td>
 		</tr>
+		</thead>
+
+		<tbody>
 		{% for obj in object_list %}
 			<tr>
 			    <td>{{ obj.pk}} </td>
 			    <td>{{ obj.name }}</td>
 			    <td>{{ obj.publish.name }} </td>
 			    <td>{{ obj.publish.city }}</td>
+			    <td>
+					<button>修改</button>
+					<button>删除</button>
+				</td>
 			</tr>
 		{% endfor %}
+		</tbody>
 	</table>
 
 </body>	
