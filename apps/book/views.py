@@ -171,6 +171,8 @@ class SchoolDetail(mixins.RetrieveModelMixin,
             return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        logger.debug(args)
+        logger.debug(kwargs)
         return self.create(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
