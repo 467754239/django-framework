@@ -6,8 +6,8 @@ import logging
 
 from .models import Book
 from .models import School
+from .serializers import SchoolSerializer
 
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
 from django.utils.decorators import method_decorator
@@ -16,22 +16,20 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import mixins
 from rest_framework import generics
 
-from .serializers import SchoolSerializer
 
 
 logger = logging.getLogger('api')
-# Create your views here.
+
 
 
 def BookFunc(request):
-
+    logger.debug("book func view.")
     if request.method == 'GET':
         return HttpResponse("book func-base view, method: GET")
 
@@ -76,7 +74,6 @@ class BookListView(ListView):
     context_object_name = 'object_list'
     paginate_by = 10
 
-
     def get_context_data(self, **kwargs):
         context = super(BookListView, self).get_context_data(**kwargs)  # 先执行父类并保存父类的执行结果
         context['job'] = 'pythoner'
@@ -97,18 +94,19 @@ class BookDetailView(DetailView):
         return super(BookDetailView, self).get_context_data(**kwargs)  # 先执行父类并保存父类的执行结果
 
 
-
 # Restful
 '''
 http://www.django-rest-framework.org/tutorial/3-class-based-views/
 '''
+
+
 @method_decorator(csrf_exempt, name='dispatch')
 class BookRestfulList(APIView):
     model = School
     serializer_class = SchoolSerializer
 
-    #@method_decorator(csrf_exempt)
-    #def dispatch(self, *args, **kwargs):
+    # @method_decorator(csrf_exempt)
+    # def dispatch(self, *args, **kwargs):
     #    return super(BookRestfulList, self).dispatch(*args, **kwargs)
     def get_object(self, pk):
         try:
@@ -127,7 +125,7 @@ class BookRestfulList(APIView):
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
-        s= self.serializer_class(data=request.data)
+        s = self.serializer_class(data=request.data)
         if s.is_valid():
             s.save()
             return Response(s.data, status=status.HTTP_201_CREATED)
@@ -136,7 +134,7 @@ class BookRestfulList(APIView):
     def put(self, request, *args, **kwargs):
         pk = kwargs.get('pk', None)
         obj = self.get_object(pk)
-        s= self.serializer_class(obj, data=request.data)
+        s = self.serializer_class(obj, data=request.data)
         if s.is_valid():
             s.save()
             return Response(s.data)
@@ -147,6 +145,7 @@ class BookRestfulList(APIView):
         obj.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 '''
 mixins.ListModelMixin # 返回queryset数据
 mixins.RetrieveModelMixin # 返回单条数据
@@ -154,25 +153,24 @@ mixins.RetrieveModelMixin # 返回单条数据
 
 http://www.django-rest-framework.org/tutorial/3-class-based-views/
 '''
-class SchoolDetail(mixins.RetrieveModelMixin,
-                  mixins.ListModelMixin,
-                  mixins.CreateModelMixin,
-                  mixins.UpdateModelMixin,
-                  mixins.DestroyModelMixin,
-                  generics.GenericAPIView):
 
+
+class SchoolDetail(mixins.RetrieveModelMixin,
+                   mixins.ListModelMixin,
+                   mixins.CreateModelMixin,
+                   mixins.UpdateModelMixin,
+                   mixins.DestroyModelMixin,
+                   generics.GenericAPIView):
     queryset = School.objects.all()
     serializer_class = SchoolSerializer
 
     def get(self, request, *args, **kwargs):
-	if kwargs.get('pk', None):
+        if kwargs.get('pk', None):
             return self.retrieve(request, *args, **kwargs)
         else:
             return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        logger.debug(args)
-        logger.debug(kwargs)
         return self.create(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
@@ -180,3 +178,9 @@ class SchoolDetail(mixins.RetrieveModelMixin,
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+    def get_serializer(self, *args, **kwargs):
+        logger.debug(args)
+        logger.debug(kwargs)
+
+        return super(SchoolDetail, self).get_serializer(*args, **kwargs)

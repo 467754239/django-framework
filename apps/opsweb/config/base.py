@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'scheduler',
     'profiles',
     'book',
+    'assets',
 ]
 
 MIDDLEWARE = [
@@ -93,13 +94,6 @@ WSGI_APPLICATION = 'opsweb.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
 
 DATABASES = {
     'default': {
@@ -224,7 +218,14 @@ REST_FRAMEWORK_DOCS = {
 }
 
 
+'''
+JSONParser
+    http://www.django-rest-framework.org/api-guide/parsers/
+'''
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-        'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+            )
         }

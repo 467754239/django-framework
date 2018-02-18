@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -14,4 +14,6 @@ DATABASES = {
          'PORT': 3306,
       },
 }
+
 LANGUAGE_CODE = 'zh-hans'
+

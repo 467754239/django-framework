@@ -16,9 +16,6 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from rest_framework.authtoken import views
-from rest_framework.documentation import include_docs_urls
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
@@ -27,4 +24,6 @@ urlpatterns += [
     #url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^docs/', include('rest_framework_docs.urls')),
     url(r'^books/', include('book.urls')),
+    url(r'^assets/', include('assets.urls')),
+    url(r'^api/', include('api.urls')),
 ]

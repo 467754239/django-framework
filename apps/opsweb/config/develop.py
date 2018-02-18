@@ -14,3 +14,5 @@ DATABASES = {
          'PORT': 3306,
       },
 }
+
+LANGUAGE_CODE = 'zh-hans'
